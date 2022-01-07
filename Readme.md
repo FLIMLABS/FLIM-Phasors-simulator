@@ -478,13 +478,13 @@ median_filtering(G,S,max_lifetime,harmonic)
 
 The **quarter_image** will produce an image made up my four subimages having equal intensities but different lifetimes.
 
-**1st** subimage - tau1
+- **1st** subimage - tau1
 
-**2nd** subimage - 50% tau1 and 50% tau3
+- **2nd** subimage - 50% tau1 and 50% tau3
 
-**3rd** subimage - 50% tau1 and 50% tau2
+- **3rd** subimage - 50% tau1 and 50% tau2
 
-**4th** subimage - tau2
+- **4th** subimage - tau2
 
 
 ![png](quarter_image.png)
