@@ -315,7 +315,7 @@ tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime,harmonic)
 # Median_filtering
 
 The **median_filtering** function will ouput median filtered version of the FLIM images calculated both with phase and modulation respectively. x1 and x2 times median filter outputs are shown
-[Phasor plot and median filtering](https://escholarship.org/content/qt5g279175/qt5g279175.pdf)
+- [Phasor plot and median filtering](https://escholarship.org/content/qt5g279175/qt5g279175.pdf)
 
 ```python
 def median_filtering(G,S,max_lifetime, harmonic):
