@@ -2,7 +2,8 @@
 
 With the FLIM-Phasors simulator it is possible to create FLIM images and display the associated phasor plot.
 
-A jupyter lab notebook is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb)
+A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb)
+
 
 Needed libraries
 
@@ -28,7 +29,6 @@ Select the desired fluorescence lifetimes
 tau1 = 0.5 # in nanoseconds
 tau2 = 2   # in nanoseconds
 tau3 = 3   # in nanoseconds
-tau4 = 4   # in nanoseconds
 ```
 
 Select the laser period
@@ -70,6 +70,8 @@ harmonic = 1
 # Half_image
 
 The **half_image** function below will produce an image made up my two subimages having equal intensities but different lifetimes
+
+![png](half_image.png)
 
 **Inputs**
     
@@ -159,15 +161,33 @@ G,S,image=half_image(tau1, tau2, photons, laser_period_in_nanoseconds, harmonic,
 # Phasor_plotting
 
 The **phasor_plotting** function outputs 5 different figures:
-1. the phasor plot
+
+1. the [phasor plot](10.1529/biophysj.107.120154)
 2. the final intensity image
 3. the FLIM image calulated using the lifetime values calculated with the phase
 4. the FLIM image calulated using the lifetime values calculated with the modulation
 5. a 2D histogram of the modulation lifetimes vs. the phase lifetimes
 
+**Phasor_plotting** I/Os :
+
+**Inputs**
+
+1. image(x,y,photons) - x pixel, y pixel wide inensity image
+2. G(x,y,g) - x pixel, y pixel wide g coordinates for the nth-harmonic phasor plot
+3. S(x,y,s) - x pixel, y pixel wide s coordinates for the nth-harmonic phasor plot
+4. max_lifetime - full-scale maximum lifetime in nanoseconds
+5. hist_bins - number of histogram bins for the 2D histogram of the modulation lifetimes vs. the phase lifetimes
+
+
+**Outputs**
+
+6. tau_m(x,y,lifetime_modulation) - x pixel, y pixel wide lifetime values calculated with the modulation using the nth-harmonic
+7. tau_m(x,y,lifetime_phase) - x pixel, y pixel wide lifetime values calculated with the phase using the nth-harmonic
+
+
 
 ```python
-def phasor_plotting(G,S,image,max_lifetime,hist_bins=0):
+def phasor_plotting(G,S,image,max_lifetime,harmonic,hist_bins=0):
     
     # Inputs
     
@@ -284,8 +304,8 @@ Calling **phasor_plotting**
 
 
 ```python
-max_lifetime = tau4
-tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime)
+max_lifetime = tau3 + 1
+tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime,harmonic)
 ```
 
 
@@ -295,21 +315,23 @@ tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime)
 # Median_filtering
 
 The **median_filtering** function will ouput median filtered version of the FLIM images calculated both with phase and modulation respectively. x1 and x2 times median filter outputs are shown
-
+[Phasor plot and median filtering](https://escholarship.org/content/qt5g279175/qt5g279175.pdf)
 
 ```python
-def median_filtering(G,S,max_lifetime):
-
-    G_result = ndimage.median_filter(G, size=3)
-    S_result = ndimage.median_filter(S, size=3)
-
-    G_result2 = ndimage.median_filter(G_result, size=3)
-    S_result2 = ndimage.median_filter(S_result, size=3)
+def median_filtering(G,S,max_lifetime, harmonic):
+    
+    # Median filter x1 time
+    G_result = ndimage.median_filter(G, size=3) # applying a 3x3 pixels median filter on G matrix x1 time
+    S_result = ndimage.median_filter(S, size=3) # applying a 3x3 pixels median filter on S matrix x1 time
+    
+    # Median filter x2 times
+    G_result2 = ndimage.median_filter(G_result, size=3) # applying a 3x3 pixels median filter on G matrix x2 times
+    S_result2 = ndimage.median_filter(S_result, size=3) # applying a 3x3 pixels median filter on S matrix x2 times
 
     fig = plt.figure(figsize=(23,18))
 
-    h = 1
-    tau_p = (laser_period_in_nanoseconds/(2*pi*h))*(S/G)
+    # Phase lifetime with G,S
+    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S/G)
     plt.subplot(3,3,1),plt.imshow(tau_p, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM"
     plt.title(title)
@@ -318,8 +340,8 @@ def median_filtering(G,S,max_lifetime):
     cbar = plt.colorbar()
     cbar.ax.set_ylabel('Phase Lifetime (ns)')
 
-
-    tau_p = (laser_period_in_nanoseconds/(2*pi*h))*(S_result/G_result)
+    # Phase lifetime with G,S after x1 time median filter
+    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S_result/G_result)
     plt.subplot(3,3,2),plt.imshow(tau_p, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x1 time"
     plt.title(title)
@@ -328,8 +350,8 @@ def median_filtering(G,S,max_lifetime):
     cbar = plt.colorbar()
     cbar.ax.set_ylabel('Phase Lifetime (ns)')
 
-
-    tau_p = (laser_period_in_nanoseconds/(2*pi*h))*(S_result2/G_result2)
+    # Phase lifetime with G,S after x2 times median filter
+    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S_result2/G_result2)
     plt.subplot(3,3,3),plt.imshow(tau_p, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x2 times"
     plt.title(title)
@@ -338,7 +360,8 @@ def median_filtering(G,S,max_lifetime):
     cbar = plt.colorbar()
     cbar.ax.set_ylabel('Phase Lifetime (ns)')
 
-    tau_m = (laser_period_in_nanoseconds/(2*pi*h))*np.sqrt((1/(S*S+G*G))-1)
+    # Modulation lifetime with G,S
+    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S*S+G*G))-1)
     plt.subplot(3,3,4),plt.imshow(tau_m, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM"
     plt.title(title)
@@ -347,8 +370,8 @@ def median_filtering(G,S,max_lifetime):
     cbar = plt.colorbar()
     cbar.ax.set_ylabel('Modulation Lifetime (ns)')
 
-
-    tau_m = (laser_period_in_nanoseconds/(2*pi*h))*np.sqrt((1/(S_result*S_result+G_result*G_result))-1)
+    # Modulation lifetime with G,S after x1 time median filter
+    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S_result*S_result+G_result*G_result))-1)
     plt.subplot(3,3,5),plt.imshow(tau_m, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x1 time"
     plt.title(title)
@@ -357,10 +380,9 @@ def median_filtering(G,S,max_lifetime):
     cbar = plt.colorbar()
     cbar.ax.set_ylabel('Modulation Lifetime (ns)')
 
-
-    tau_m = (laser_period_in_nanoseconds/(2*pi*h))*np.sqrt((1/(S_result2*S_result2+G_result2*G_result2))-1)
+    # Modulation lifetime with G,S after x2 times median filter
+    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S_result2*S_result2+G_result2*G_result2))-1)
     plt.subplot(3,3,6),plt.imshow(tau_m, vmin = 0, vmax = max_lifetime, cmap='jet')
-
     title = "FLIM - median filter x2 times"
     plt.title(title)
     plt.xlabel('$x (pixels) $')
@@ -445,7 +467,7 @@ Calling **median_filtering**
 
 
 ```python
-median_filtering(G,S,max_lifetime)
+median_filtering(G,S,max_lifetime,harmonic)
 ```
 
 
@@ -458,11 +480,14 @@ The **quarter_image** will produce an image made up my four subimages having equ
 
 **1st** subimage - tau1
 
-**2nd** subimage - 50% tau1 and 50% tau2
+**2nd** subimage - 50% tau1 and 50% tau3
 
-**3rd** subimage - tau2
+**3rd** subimage - 50% tau1 and 50% tau2
 
-**4th** subimage - 50% tau1 and 50% tau3
+**4th** subimage - tau2
+
+
+![png](quarter_image.png)
 
 
 **Inputs**
@@ -594,8 +619,8 @@ Calling **phasor_plotting** and **median_filtering**
 
 
 ```python
-tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime)
-median_filtering(G,S,max_lifetime)
+tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime,harmonic)
+median_filtering(G,S,max_lifetime,harmonic)
 ```
 
 
@@ -625,8 +650,8 @@ max_lifetime = tau3 + 1
 
 ```python
 G,S,image=quarter_image(tau1, tau2, tau3, photons, laser_period_in_nanoseconds, harmonic, bin_number, x_dim, y_dim)
-tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime)
-median_filtering(G,S,max_lifetime)
+tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime,harmonic)
+median_filtering(G,S,max_lifetime,harmonic)
 ```
 
 
