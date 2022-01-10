@@ -1,6 +1,6 @@
 # FLIM-Phasors simulator v1.0
 
-With the FLIM-Phasors simulator it is possible to create FLIM images and display the associated phasor plot.
+With the FLIM-Phasors simulator it is possible to create FLIM images and display the associated [phasor plot](#phasor_plotting).
 
 Two types of function are available in this first release:
 
