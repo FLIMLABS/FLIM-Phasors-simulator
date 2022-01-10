@@ -29,6 +29,9 @@ This simulator allows also to explore the [median filter function](#median_filte
 
 A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb) but, for immediate reference, its content is reported below:
 
+<details>
+  <summary>Click to expand!</summary>
+
 Needed libraries
 
 
@@ -116,8 +119,12 @@ The **half_image** function below will produce an image made up my two subimages
 3. S(x,y,s) - x pixel, y pixel wide s coordinates for the nth-harmonic phasor plot
 
 
+
+
 ```python
 def half_image(tau1, tau2, photons, laser_period_in_nanoseconds, harmonic, bin_number, x_dim, y_dim):
+
+
     
     # Inputs
     
@@ -174,6 +181,7 @@ def half_image(tau1, tau2, photons, laser_period_in_nanoseconds, harmonic, bin_n
         
     return G,S,image
 ```
+
 
 Calling **half_image**
 
@@ -685,3 +693,4 @@ median_filtering(G,S,max_lifetime,harmonic)
 
 ![png](Images/image_6.png)
 
+</details>
