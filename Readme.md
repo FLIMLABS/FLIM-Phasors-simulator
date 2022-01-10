@@ -1,16 +1,16 @@
 # FLIM-Phasors simulator v1.0
 
-With the FLIM-Phasors simulator it is possible to create FLIM images and display the associated [phasor plot](#phasor_plotting).
+With the FLIM-Phasors simulator it is possible to create FLIM images and display them along with the associated [phasor plot](#phasor_plotting).
 
-Two types of function are available in this first release:
+Two types of function are available in this first release for creating artificial FLIM datasets:
 
-1. **half_image** function produces an image made up my two subimages having equal intensities but different lifetimes &tau;<sub>1</sub> and &tau;<sub>2</sub>
+1. [**half_image**](#half_image) function produces an image made up my two subimages having equal intensities but different lifetimes &tau;<sub>1</sub> and &tau;<sub>2</sub>
 
 ![png](half_image.png)
 
 *Fig.1 - half_image output having &tau;<sub>1</sub> and &tau;<sub>2</sub> subimages*
 
-2. **quarter_image** function produces an image made up my four subimages having equal intensities but different lifetimes:
+2. [**quarter_image**](#quarter_image) function produces an image made up my four subimages having equal intensities but different lifetimes:
 
 - **1st** subimage - &tau;<sub>1</sub>
 
@@ -25,7 +25,9 @@ Two types of function are available in this first release:
 
 *Fig.2 - quarter_image function output having four subimages*
 
-A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb) and its content is reported below:
+This simulator allows also to explore the [median filter function](#median_filtering) to boost phasors accuracy.
+
+A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb) but, for immediate reference, its content is reported below:
 
 Needed libraries
 
