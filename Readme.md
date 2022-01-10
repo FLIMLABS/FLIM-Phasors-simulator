@@ -29,8 +29,6 @@ This simulator allows also to explore the [median filter function](#median_filte
 
 A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb) but, for immediate reference, its content is reported below:
 
-<details>
-  <summary>Click to expand!</summary>
 
 Needed libraries
 
@@ -692,5 +690,3 @@ median_filtering(G,S,max_lifetime,harmonic)
 
 
 ![png](Images/image_6.png)
-
-</details>
