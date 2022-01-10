@@ -6,7 +6,7 @@ Two types of function are available in this first release for creating artificia
 
 1. [**half_image**](#half_image) function produces an image made up my two subimages having equal intensities but different lifetimes &tau;<sub>1</sub> and &tau;<sub>2</sub>
 
-![png](half_image.png)
+![png](Images/half_image.png)
 
 *Fig.1 - half_image output having &tau;<sub>1</sub> and &tau;<sub>2</sub> subimages*
 
@@ -21,7 +21,7 @@ Two types of function are available in this first release for creating artificia
 - **4th** subimage - &tau;<sub>2</sub>
 
 
-![png](quarter_image.png)
+![png](Images/quarter_image.png)
 
 *Fig.2 - quarter_image function output having four subimages*
 
@@ -95,7 +95,7 @@ harmonic = 1
 
 The **half_image** function below will produce an image made up my two subimages having equal intensities but different lifetimes
 
-![png](half_image.png)
+![png](Images/half_image.png)
 
 **Inputs**
     
@@ -333,7 +333,7 @@ tau_m,tau_p = phasor_plotting(G,S,image,max_lifetime,harmonic)
 ```
 
 
-![png](image_1.png)
+![png](Images/image_1.png)
 
 
 # Median_filtering
@@ -495,7 +495,7 @@ median_filtering(G,S,max_lifetime,harmonic)
 ```
 
 
-![png](image_2.png)
+![png](Images/image_2.png)
 
 
 # Quarter_image
@@ -511,7 +511,7 @@ The **quarter_image** will produce an image made up my four subimages having equ
 - **4th** subimage - &tau;<sub>2</sub>
 
 
-![png](quarter_image.png)
+![png](Images/quarter_image.png)
 
 
 **Inputs**
@@ -648,11 +648,11 @@ median_filtering(G,S,max_lifetime,harmonic)
 ```
 
 
-![png](image_3.png)
+![png](Images/image_3.png)
 
 
 
-![png](image_4.png)
+![png](Images/image_4.png)
 
 
 # Example
@@ -679,9 +679,9 @@ median_filtering(G,S,max_lifetime,harmonic)
 ```
 
 
-![png](image_5.png)
+![png](Images/image_5.png)
 
 
 
-![png](image_6.png)
+![png](Images/image_6.png)
 
