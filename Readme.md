@@ -2,8 +2,30 @@
 
 With the FLIM-Phasors simulator it is possible to create FLIM images and display the associated phasor plot.
 
-A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb)
+Two types of function are available in this first release:
 
+1. **half_image** function produces an image made up my two subimages having equal intensities but different lifetimes &tau;<sub>1</sub> and &tau;<sub>2</sub>
+
+![png](half_image.png)
+
+*Fig.1 - half_image output having &tau;<sub>1</sub> and &tau;<sub>2</sub> subimages*
+
+2. **quarter_image** function produces an image made up my four subimages having equal intensities but different lifetimes:
+
+- **1st** subimage - &tau;<sub>1</sub>
+
+- **2nd** subimage - 50% &tau;<sub>1</sub> and 50% &tau;<sub>3</sub>
+
+- **3rd** subimage - 50% &tau;<sub>1</sub> and 50% &tau;<sub>2</sub>
+
+- **4th** subimage - &tau;<sub>2</sub>
+
+
+![png](quarter_image.png)
+
+*Fig.2 - quarter_image function output having four subimages*
+
+A jupyter notebook of the FLIM-Phasors simulator is available here [FLIM-Phasors simulator](https://github.com/FLIMLABS/FLIM-Phasors-simulator/blob/main/FLIM-Phasors%20simulator.ipynb) and its content is reported below:
 
 Needed libraries
 
@@ -75,8 +97,8 @@ The **half_image** function below will produce an image made up my two subimages
 
 **Inputs**
     
-1. tau1 - lifetime in nanoseconds
-2. tau2 - lifetime in nanoseconds
+1. &tau;<sub>1</sub> - lifetime in nanoseconds
+2. &tau;<sub>2</sub> - lifetime in nanoseconds
 3. photons - number of photons per pixel
 4. laser_period_in_nanoseconds - laser period in nanoseconds
 5. harmonic - harmonic number for the phasor plot analysis and representation
@@ -478,13 +500,13 @@ median_filtering(G,S,max_lifetime,harmonic)
 
 The **quarter_image** will produce an image made up my four subimages having equal intensities but different lifetimes.
 
-- **1st** subimage - tau1
+- **1st** subimage - &tau;<sub>1</sub>
 
-- **2nd** subimage - 50% tau1 and 50% tau3
+- **2nd** subimage - 50% &tau;<sub>1</sub> and 50% &tau;<sub>3</sub>
 
-- **3rd** subimage - 50% tau1 and 50% tau2
+- **3rd** subimage - 50% &tau;<sub>1</sub> and 50% &tau;<sub>2</sub>
 
-- **4th** subimage - tau2
+- **4th** subimage - &tau;<sub>2</sub>
 
 
 ![png](quarter_image.png)
@@ -492,9 +514,9 @@ The **quarter_image** will produce an image made up my four subimages having equ
 
 **Inputs**
     
-1. tau1 - lifetime in nanoseconds
-2. tau2 - lifetime in nanoseconds
-3. tau3 - lifetime in nanoseconds
+1. &tau;<sub>1</sub> - lifetime in nanoseconds
+2. &tau;<sub>2</sub> - lifetime in nanoseconds
+3. &tau;<sub>3</sub> - lifetime in nanoseconds
 4. photons - number of photons per pixel
 5. laser_period_in_nanoseconds - laser period in nanoseconds
 6. harmonic - harmonic number for the phasor plot analysis and representation
