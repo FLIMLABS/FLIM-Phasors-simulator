@@ -24,7 +24,7 @@ Four types of function are available in this second release for creating artific
 
 *Fig.2 - quarter_image function output having four subimages*
 
-see [**Example 1**](#example_1)
+see [**Example 1**](#example1)
 
 3. [**band_image**](#band_image) function produces an image divided in a n number of bands having equal intensities but different lifetimes
 
@@ -678,7 +678,7 @@ median_filtering(G,S,max_lifetime,harmonic)
 ![png](Images/image_4.png)
 
 
-# Example
+# Example 1
 
 
 ```python
