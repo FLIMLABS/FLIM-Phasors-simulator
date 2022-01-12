@@ -10,37 +10,29 @@ Four types of function are available in this second release for creating artific
 
 *Fig.1 - half_image output having &tau;<sub>1</sub> and &tau;<sub>2</sub> subimages*
 
-2. [**quarter_image**](#quarter_image) function produces an image made up my four subimages having equal intensities but different lifetimes:
-
-- **1st** subimage - &tau;<sub>1</sub>
-
-- **2nd** subimage - 50% &tau;<sub>1</sub> and 50% &tau;<sub>3</sub>
-
-- **3rd** subimage - 50% &tau;<sub>1</sub> and 50% &tau;<sub>2</sub>
-
-- **4th** subimage - &tau;<sub>2</sub>
+2. [**quarter_image**](#quarter_image) function produces an image made up my four subimages having equal intensities but different lifetimes - see [**Example 1**](#example-1).
 
 ![png](Images/quarter_image.png)
 
 *Fig.2 - quarter_image function output having four subimages*
 
-see [**Example 1**](#example-1)
 
-3. [**band_image**](#band_image) function produces an image divided in a n number of bands having equal intensities but different lifetimes
+
+3. [**band_image**](#band_image) function produces an image divided in a n number of bands having equal intensities but different lifetimes - see [**Example 2**](#example-2).
 
 ![png](Images/band_image.png)
 
 *Fig.3 - band_image function output*
 
-see [**Example 2**](#example-2)
 
-4. [**stripe_image**](#stripe_image) function produces an image divided in a n number of stripes having equal intensities but different lifetimes
+
+4. [**stripe_image**](#stripe_image) function produces an image divided in a n number of stripes having equal intensities but different lifetimes - see [**Example 3**](#example-3).
+
 
 ![png](Images/stripe_image.png)
 
 *Fig.3 - stripe_image function output*
 
-see [**Example 3**](#example-3)
 
 This simulator allows also to explore the [median filter function](#median_filtering) to boost phasors accuracy.
 
