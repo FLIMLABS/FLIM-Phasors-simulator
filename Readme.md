@@ -1,8 +1,8 @@
-# FLIM-Phasors simulator v1.0
+# FLIM-Phasors simulator v2.0
 
 With the FLIM-Phasors simulator it is possible to create FLIM images and display them along with the associated [phasor plot](#phasor_plotting).
 
-Two types of function are available in this first release for creating artificial FLIM datasets:
+Four types of function are available in this second release for creating artificial FLIM datasets:
 
 1. [**half_image**](#half_image) function produces an image made up my two subimages having equal intensities but different lifetimes &tau;<sub>1</sub> and &tau;<sub>2</sub>
 
@@ -20,10 +20,27 @@ Two types of function are available in this first release for creating artificia
 
 - **4th** subimage - &tau;<sub>2</sub>
 
-
 ![png](Images/quarter_image.png)
 
 *Fig.2 - quarter_image function output having four subimages*
+
+see [**Example 1**](#example1)
+
+3. [**band_image**](#band_image) function produces an image divided in a n number of bands having equal intensities but different lifetimes
+
+![png](Images/band_image.png)
+
+*Fig.3 - band_image function output*
+
+see [**Example 2**](#example2)
+
+4. [**stripe_image**](#stripe_image) function produces an image divided in a n number of stripes having equal intensities but different lifetimes
+
+![png](Images/stripe_image.png)
+
+*Fig.3 - stripe_image function output*
+
+see [**Example 3**](#example3)
 
 This simulator allows also to explore the [median filter function](#median_filtering) to boost phasors accuracy.
 
