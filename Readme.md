@@ -34,12 +34,12 @@ Four types of function are available in this second release for creating artific
 *Fig.3 - stripe_image function output*
 
 
-5. [**random_composite_stripe_image**](#random_composite_stripe_image) function produces an image divided in a n number of stripes having equal intensities but different lifetimes - see [**Example 3**](#example-4).
+5. [**random_composite_stripe_image**](#random_composite_stripe_image) function produces an image divided in a n number of stripes having equal intensities but different lifetimes - see [**Example 4**](#example-4).
 
 
 ![png](Images/random_composite_stripe_image.png)
 
-*Fig.4 - stripe_image function output*
+*Fig.4 - random_composite_stripe_image function output*
 
 
 This simulator allows also to explore the [median filter function](#median_filtering) to boost phasors accuracy.
