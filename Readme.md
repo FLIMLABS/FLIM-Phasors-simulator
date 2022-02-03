@@ -166,8 +166,8 @@ def half_image(tau1, tau2, photons, laser_period_in_nanoseconds, harmonic, bin_n
             dist1 = np.histogram(Y1, bins=bin_number) # TCSPC histogram calculation
             x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
             y1 = dist1[0]       # y axis values for TCSPC histogram
-            sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-            cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+            sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+            cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
             G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
             S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
             image[i][j] = y1.sum()                # computing intensity image
@@ -180,8 +180,8 @@ def half_image(tau1, tau2, photons, laser_period_in_nanoseconds, harmonic, bin_n
             dist1 = np.histogram(Y1, bins=bin_number) # TCSPC histogram calculation
             x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
             y1 = dist1[0]       # y axis values for TCSPC histogram
-            sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-            cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+            sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+            cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
             G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
             S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
             image[i][j] = y1.sum()                # computing intensity image
@@ -285,7 +285,7 @@ def phasor_plotting(G,S,image,max_lifetime,harmonic,hist_bins=0):
     cbar.ax.set_ylabel('\n Photons')
 
     # Phase lifetime
-    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S/G) # calculation of lifetime using the phase
+    tau_p = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*(S/G) # calculation of lifetime using the phase
     plt.subplot(3,2,3)
     
     # FLIM from phase lifetime
@@ -299,7 +299,7 @@ def phasor_plotting(G,S,image,max_lifetime,harmonic,hist_bins=0):
     cbar.ax.set_ylabel('\n Phase Lifetime (ns)')
 
     # Modulation lifetime
-    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S*S+G*G))-1) # calculation of lifetime using the modulation
+    tau_m = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*np.sqrt((1/(S*S+G*G))-1) # calculation of lifetime using the modulation
     plt.subplot(3,2,4)
     
     # FLIM from modulation lifetime
@@ -370,7 +370,7 @@ def median_filtering(G,S,max_lifetime, harmonic):
     fig = plt.figure(figsize=(23,18))
 
     # Phase lifetime with G,S
-    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S/G)
+    tau_p = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*(S/G)
     plt.subplot(3,3,1),plt.imshow(tau_p, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM"
     plt.title(title)
@@ -380,7 +380,7 @@ def median_filtering(G,S,max_lifetime, harmonic):
     cbar.ax.set_ylabel('Phase Lifetime (ns)')
 
     # Phase lifetime with G,S after x1 time median filter
-    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S_result/G_result)
+    tau_p = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*(S_result/G_result)
     plt.subplot(3,3,2),plt.imshow(tau_p, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x1 time"
     plt.title(title)
@@ -390,7 +390,7 @@ def median_filtering(G,S,max_lifetime, harmonic):
     cbar.ax.set_ylabel('Phase Lifetime (ns)')
 
     # Phase lifetime with G,S after x2 times median filter
-    tau_p = (laser_period_in_nanoseconds/(2*pi*harmonic))*(S_result2/G_result2)
+    tau_p = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*(S_result2/G_result2)
     plt.subplot(3,3,3),plt.imshow(tau_p, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x2 times"
     plt.title(title)
@@ -400,7 +400,7 @@ def median_filtering(G,S,max_lifetime, harmonic):
     cbar.ax.set_ylabel('Phase Lifetime (ns)')
 
     # Modulation lifetime with G,S
-    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S*S+G*G))-1)
+    tau_m = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*np.sqrt((1/(S*S+G*G))-1)
     plt.subplot(3,3,4),plt.imshow(tau_m, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM"
     plt.title(title)
@@ -410,7 +410,7 @@ def median_filtering(G,S,max_lifetime, harmonic):
     cbar.ax.set_ylabel('Modulation Lifetime (ns)')
 
     # Modulation lifetime with G,S after x1 time median filter
-    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S_result*S_result+G_result*G_result))-1)
+    tau_m = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*np.sqrt((1/(S_result*S_result+G_result*G_result))-1)
     plt.subplot(3,3,5),plt.imshow(tau_m, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x1 time"
     plt.title(title)
@@ -420,7 +420,7 @@ def median_filtering(G,S,max_lifetime, harmonic):
     cbar.ax.set_ylabel('Modulation Lifetime (ns)')
 
     # Modulation lifetime with G,S after x2 times median filter
-    tau_m = (laser_period_in_nanoseconds/(2*pi*harmonic))*np.sqrt((1/(S_result2*S_result2+G_result2*G_result2))-1)
+    tau_m = (laser_period_in_nanoseconds/(2*np.pi*harmonic))*np.sqrt((1/(S_result2*S_result2+G_result2*G_result2))-1)
     plt.subplot(3,3,6),plt.imshow(tau_m, vmin = 0, vmax = max_lifetime, cmap='jet')
     title = "FLIM - median filter x2 times"
     plt.title(title)
@@ -588,8 +588,8 @@ def quarter_image(tau1, tau2, tau3, photons, laser_period_in_nanoseconds, harmon
             dist1 = np.histogram(Y1, bins=bin_number) # TCSPC histogram calculation
             x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
             y1 = dist1[0]       # y axis values for TCSPC histogram
-            sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-            cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+            sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+            cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
             G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
             S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
             image[i][j] = y1.sum()                # computing intensity image
@@ -601,13 +601,13 @@ def quarter_image(tau1, tau2, tau3, photons, laser_period_in_nanoseconds, harmon
             Y1 = (Y1)%laser_period_in_nanoseconds # using the MOD mathematical operation to constrain photons arrivals within the laser period
             Y2 = np.random.exponential(tau2, int(photons/2)) # random exponential distribution having tau as a decay constant
             Y2 = (Y2)%laser_period_in_nanoseconds # using the MOD mathematical operation to constrain photons arrivals within the laser period
-            Y = numpy.concatenate((Y1, Y2)) # concatenating Y1 and Y2 distribution to get a double lifetine specie fluorescence decay
+            Y = np.concatenate((Y1, Y2)) # concatenating Y1 and Y2 distribution to get a double lifetine specie fluorescence decay
             # the two species are mixed as their ratio is 1:1
             dist1 = np.histogram(Y, bins=bin_number)
             x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
             y1 = dist1[0]       # y axis values for TCSPC histogram
-            sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-            cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+            sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+            cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
             G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
             S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
             image[i][j] = y1.sum()                # computing intensity image
@@ -620,8 +620,8 @@ def quarter_image(tau1, tau2, tau3, photons, laser_period_in_nanoseconds, harmon
             dist1 = np.histogram(Y1, bins=bin_number) # TCSPC histogram calculation
             x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
             y1 = dist1[0]       # y axis values for TCSPC histogram
-            sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-            cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+            sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+            cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
             G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
             S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
             image[i][j] = y1.sum()                # computing intensity image
@@ -633,13 +633,13 @@ def quarter_image(tau1, tau2, tau3, photons, laser_period_in_nanoseconds, harmon
             Y1 = (Y1)%laser_period_in_nanoseconds # using the MOD mathematical operation to constrain photons arrivals within the laser period
             Y2 = np.random.exponential(tau3, int(photons/2)) # random exponential distribution having tau as a decay constant
             Y2 = (Y2)%laser_period_in_nanoseconds # using the MOD mathematical operation to constrain photons arrivals within the laser period
-            Y = numpy.concatenate((Y1, Y2)) # concatenating Y1 and Y2 distribution to get a double lifetine specie fluorescence decay
+            Y = np.concatenate((Y1, Y2)) # concatenating Y1 and Y2 distribution to get a double lifetine specie fluorescence decay
             # the two species are mixed as their ratio is 1:1
             dist1 = np.histogram(Y, bins=bin_number)
             x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
             y1 = dist1[0]       # y axis values for TCSPC histogram
-            sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-            cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+            sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+            cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
             G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
             S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
             image[i][j] = y1.sum()                # computing intensity image
@@ -789,8 +789,8 @@ def band_image(image_bands, photons, laser_period_in_nanoseconds, min_lifetime, 
                     dist1 = np.histogram(Y1, bins=bins) # TCSPC histogram calculation
                     x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
                     y1 = dist1[0]       # y axis values for TCSPC histogram
-                    sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-                    cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+                    sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+                    cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
                     G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
                     S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
                     image[i][j] = y1.sum()                # computing intensity image
@@ -915,8 +915,8 @@ def stripe_image(stripes, photons, laser_period_in_nanoseconds, min_lifetime, ma
                 dist1 = np.histogram(Y1, bins=bins) # TCSPC histogram calculation
                 x1 = dist1[1][0:-1] # x axis values for TCSPC histogram
                 y1 = dist1[0]       # y axis values for TCSPC histogram
-                sine1 = np.sin(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
-                cosine1 = np.cos(2*pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
+                sine1 = np.sin(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating sine wave for phasor approach
+                cosine1 = np.cos(2*np.pi*harmonic*x1/laser_period_in_nanoseconds) # creating cosine wave for phasor approach
                 G[i][j] = (cosine1*y1).sum()/y1.sum() # computing G matrix
                 S[i][j] = (sine1*y1).sum()/y1.sum()   # computing S matrix
                 image[i][j] = y1.sum()                # computing intensity image
